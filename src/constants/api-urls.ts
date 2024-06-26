@@ -1,6 +1,6 @@
 const LOCAL_URL = "http://localhost:4000";
 const NODE_URL = "https://virtuzback.onrender.com";  // ! nodejs backend
-export const BASE_LOCAL_URL = LOCAL_URL;
+export const BASE_LOCAL_URL = NODE_URL;
 
 export enum ApiEndpoint {
     LOGIN = "login",
