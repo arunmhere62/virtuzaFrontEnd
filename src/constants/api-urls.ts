@@ -1,10 +1,6 @@
-// "http://localhost:4000";
-// export const BASE_URL_NODE = "https://node-js-invoice.onrender.com";
-// https://ims-backend-9ghn.onrender.com/login
-const JAVA_URL = "https://ims-backend-9ghn.onrender.com"; // ! java backend
 const LOCAL_URL = "http://localhost:4000";
 const NODE_URL = "https://virtuzback.onrender.com";  // ! nodejs backend
-export const BASE_LOCAL_URL = NODE_URL;
+export const BASE_LOCAL_URL = LOCAL_URL;
 
 export enum ApiEndpoint {
     LOGIN = "login",
@@ -18,6 +14,13 @@ export enum ApiEndpoint {
     //Changepassword
     CHANGE_PASSWORD = "changePassword",
     //Dashboard
+
+    // user Profile
+    USER_PROFILE_GET_USERNAME = "userProfileGetByUsername",
+    USER_PROFILE_CREATE = "userProfileCreate",
+    USER_PROFILE_UPDATE = "userProfileUpdate",
+    USER_PROFILE_DELETE = "userProfileDelete",
+    USER_PROFILE_LIST = "userProfileList",
 }
 
 export type ApiUrls = {
@@ -34,5 +37,11 @@ export const API_URLS: ApiUrls = {
     [ApiEndpoint.BLOGS_GET_ID]: `/blog/get`,
     [ApiEndpoint.BLOGS_UPDATE]: `/blog/update`,
     //Changepassword
-    [ApiEndpoint.CHANGE_PASSWORD]: `/changePassword/`
+    [ApiEndpoint.CHANGE_PASSWORD]: `/changePassword/`,
+    // USERname
+    [ApiEndpoint.USER_PROFILE_CREATE]: `/userProfile/create`,
+    [ApiEndpoint.USER_PROFILE_DELETE]: `/userProfile/delete`,
+    [ApiEndpoint.USER_PROFILE_LIST]: `/userProfile/list`,
+    [ApiEndpoint.USER_PROFILE_GET_USERNAME]: `/userProfile/get`,
+    [ApiEndpoint.USER_PROFILE_UPDATE]: `/userProfile/update`,
 };

@@ -10,17 +10,20 @@ import { useAddBlogMutation, useGetBlogQuery, useUpdateBlogMutation } from '../.
 import { AppDispatch } from '../../redux-store/store';
 import { blogValidationSchema, userProfileValidationSchema } from '../../constants/forms/validations/validationSchema';
 import { DynamicFormCreate } from '../../components/Form-renderer/Dynamic-form';
+import { useAddUserProfileMutation, useGetUserProfileByUsernameMutation, useGetUserProfileQuery, useUpdateUserProfileMutation } from '../../redux-store/userProfile/userProfileApi';
 
 // create and edit screen
 
 const UserProfileForm = ({ userProfileTypeValue }: UserProfileTypeProps) => {
 
-    const [addGstType, { isLoading: isAdding, isSuccess: isAddSuccess, isError: isAddError }] = useAddBlogMutation();
-    const [updateGstType, { isLoading: isUpdating, isSuccess: isUpdateSuccess, isError: isUpdateError }] = useUpdateBlogMutation();
+    const [addUserProfile, { isLoading: isAdding, isSuccess: isAddSuccess, isError: isAddError }] = useAddUserProfileMutation();
+    const [updateUserProfile, { isLoading: isUpdating, isSuccess: isUpdateSuccess, isError: isUpdateError }] = useUpdateUserProfileMutation();
 
     const navigate = useNavigate();
 
-    const { data: getGstType, refetch } = useGetBlogQuery();
+    console.log("value", userProfileTypeValue);
+
+    const [getUserProfileByUsername, { data: userProfile, isLoading, isError, }] = useGetUserProfileByUsernameMutation();
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -30,10 +33,10 @@ const UserProfileForm = ({ userProfileTypeValue }: UserProfileTypeProps) => {
         try {
             if (userProfileTypeValue) {
                 console.log(values);
-                await updateGstType({ id: userProfileTypeValue.id, blog: values });
+                await updateUserProfile({ id: userProfileTypeValue.id, userProfile: values });
                 dispatch(clearData());
             } else {
-                await addGstType(values);
+                await addUserProfile(values);
             }
             actions.resetForm();
         } catch (error) {
@@ -41,11 +44,12 @@ const UserProfileForm = ({ userProfileTypeValue }: UserProfileTypeProps) => {
         } finally {
             actions.setSubmitting(false);
         }
-    }, [addGstType, updateGstType, userProfileTypeValue]);
+    }, [addUserProfile, updateUserProfile, userProfileTypeValue]);
 
     useEffect(() => {
         if (isAddSuccess || isUpdateSuccess) {
-            refetch();
+            const username = localStorage.getItem('username');
+            getUserProfileByUsername({ userProfile: { username } });
             console.log("Operation successful!");
         }
     }, [isAddSuccess, isUpdateSuccess]);

@@ -4,13 +4,13 @@ import { logOut, setCredentials } from '../auth/authSlice';
 
 
 interface Token {
-    user: any;
+    username: any;
     accessToken: string;
 }
 
 interface RootState {
     auth: {
-        user: any;
+        username: any;
         token: string | null;
         refresh?: string | null;
     };
@@ -46,8 +46,8 @@ const baseQueryWithReauth = async (
 
         // If refresh is successful, update the token and retry the original query
         if (refreshResult?.data) {
-            const user = (api.getState() as RootState).auth.user;
-            api.dispatch(setCredentials({ ...refreshResult.data, user } as Token));
+            const username = (api.getState() as RootState).auth.username;
+            api.dispatch(setCredentials({ ...refreshResult.data, username } as Token));
             result = await baseQuery(args, api, extraOptions);
         }
         else {

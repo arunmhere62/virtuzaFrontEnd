@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react'
-import { AccountCircle, Logout, PersonAdd, Settings, Person, Lock } from '@mui/icons-material'
+import { AccountCircle, Logout, PersonAdd, Settings, Person, Lock, LogoutRounded } from '@mui/icons-material'
 import { logOut } from '../../redux-store/auth/authSlice'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../redux-store/store'
@@ -118,6 +118,12 @@ export default function Header() {
   const handleMenuClose = (setAnchor: any) => () => {
     setAnchor(null);
   }
+  const handleLogout = () => {
+    dispatch(logOut());
+    // Additional cleanup if needed
+    // Example: Redirecting to login page
+    window.location.href = '/login';
+  };
 
   const handleMenuItemClick = (item: any) => {
     if (item.component) {
@@ -146,28 +152,10 @@ export default function Header() {
           backgroundColor: "#ffffff",
         }}>
           <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-            <Tooltip title="Add item">
-              <IconButton sx={{ width: "30px" }} onClick={handleMenuOpen(setAddMenuAnchorEl)} size="small">
-                <AddIcon sx={{
-                  ":hover": {
-                    color: "primary.main"
-                  }, color: 'grey.500', width: "20px"
-                }} />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Settings">
-              <IconButton sx={{ width: "30px" }} onClick={() => { }}>
-                <Settings sx={{
-                  ":hover": {
-                    color: "primary.main"
-                  },
-                  color: 'grey.500', width: "20px"
-                }} />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Account settings">
-              <IconButton sx={{ width: "30px" }} onClick={handleMenuOpen(setAnchorEl)} size="small">
-                <Person sx={{
+
+            <Tooltip title="Logout">
+              <IconButton sx={{ width: "30px" }} onClick={handleLogout} size="small">
+                <LogoutRounded sx={{
                   ":hover": {
                     color: "primary.main"
                   }, color: 'grey.500', width: "20px"

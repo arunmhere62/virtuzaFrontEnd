@@ -22,7 +22,7 @@ interface LoginResponse {
     accessToken: any;
     refreshToken: any;
     userRole: any;
-    userName: any;
+    username: any;
   };
   error?: any;
 }
@@ -48,9 +48,9 @@ const Login = () => {
           if (loginResult.data && "accessToken" in loginResult.data) {
             // Check if the response contains a refresh token
             if (loginResult.data.accessToken) {
-              const { user, accessToken, refreshToken, userRole, userName } = loginResult.data;
+              const { user, accessToken, refreshToken, userRole, username } = loginResult.data;
               console.log("Access token:", refreshToken, accessToken)
-              dispatch(setCredentials({ user, accessToken, refreshToken, userRole, userName }));
+              dispatch(setCredentials({ user, accessToken, refreshToken, userRole, username }));
             } else {
               const { user, accessToken } = loginResult.data;
               dispatch(setCredentials({ user, accessToken }));
