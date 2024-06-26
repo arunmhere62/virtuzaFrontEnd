@@ -4,7 +4,6 @@ export const BASE_LOCAL_URL = NODE_URL;
 
 export enum ApiEndpoint {
     LOGIN = "login",
-
     // blogs
     BLOGS_GET_ID = "blogsGetById",
     BLOGS_CREATE = "blogsCreate",
